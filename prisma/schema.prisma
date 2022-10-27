@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = "postgres://pwsqxlnkdyovby:beb57d99b19b5fc74e96c8b09f0c8905449cd15f822659156bc4ee3ed7b44486@ec2-44-199-22-207.compute-1.amazonaws.com:5432/ddfrdk2psu9ch9"
+}
+
+model servico {
+  cdServico          Int                 @id @default(autoincrement())
+  nome               String?
+  valor              Decimal?
+  barbeiroCd         Int
+  barbeiro           barbeiro?           @relation(fields: [barbeiroCd], references: [cdBarbeiro], map: "fk_barbeiro_servico")
+}
+
+model barbeiro {
+  cdBarbeiro          Int                @id @default(autoincrement())
+  nome               String?             
+  cpfCnpj            String?             
+  endereco           String?
+  servicos servico[]
+}
+
+
