@@ -73,7 +73,7 @@ module.exports = {
 
     //Editar barbearia
     async update(request, response) {
-        const { cdBarbearia, nome, cnpj } = request.body;
+        const { cdBarbearia, nome, cnpj, endereco } = request.body;
 
         //Verifica se foi passado o código do barbearia
         if (!cdBarbearia) {
