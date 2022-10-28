@@ -8,19 +8,26 @@ datasource db {
 }
 
 model servico {
-  cdServico          Int                 @id @default(autoincrement())
-  nome               String?
-  valor              Decimal?
-  barbeiroCd         Int
-  barbeiro           barbeiro?           @relation(fields: [barbeiroCd], references: [cdBarbeiro], map: "fk_barbeiro_servico")
+  cdServico  Int       @id @default(autoincrement())
+  nome       String?
+  valor      Decimal?
+  barbeiroCd Int
+  barbeiro   barbeiro? @relation(fields: [barbeiroCd], references: [cdBarbeiro], map: "fk_barbeiro_servico")
 }
 
 model barbeiro {
-  cdBarbeiro          Int                @id @default(autoincrement())
-  nome               String?             
-  cpfCnpj            String?             
-  endereco           String?
-  servicos servico[]
+  cdBarbeiro  Int       @id @default(autoincrement())
+  nome        String?
+  cpf         String?
+  barbeariaCd Int
+  servicos    servico[]
+  barbearia   barbearia? @relation(fields: [barbeariaCd], references: [cdBarbearia], map: "fk_barbearia_barbeiro")
 }
 
-
+model barbearia {
+  cdBarbearia Int        @id @default(autoincrement())
+  nome        String?
+  cnpj        String?
+  endereco    String?
+  barbeiros   barbeiro[]
+}

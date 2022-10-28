@@ -4,15 +4,15 @@ const prisma = new PrismaClient();
 module.exports = {
 
     async create(request, response) {
-        const { nome, cpfCnpj, endereco } = request.body;
+        const { nome, cpf, endereco, barbeariaCd } = request.body;
 
         //Valida se foi passado um nome
         if (!nome) {
             return response.status(400).json({ error: "Necessario um nome!" });
         }
         //Valida se foi passado uma data
-        if (!cpfCnpj) {
-            return response.status(400).json({ error: "Necessario uma CPF ou CNPJ!" });
+        if (!cpf) {
+            return response.status(400).json({ error: "Necessario um CPF!" });
         }
         //Valida se foi passado um local
         if (!endereco) {
@@ -24,8 +24,9 @@ module.exports = {
         const barbeiro = await prisma.barbeiro.create({
             data: {
                 nome,
-                cpfCnpj,
+                cpf,
                 endereco,
+                barbeariaCd
             },
         });
 
@@ -78,7 +79,7 @@ module.exports = {
 
     //Editar barbeiro
     async update(request, response) {
-        const { cdBarbeiro, nome, cpfCnpj, endereco } = request.body;
+        const { cdBarbeiro, nome, cpf, endereco } = request.body;
 
         //Verifica se foi passado o código do barbeiro
         if (!cdBarbeiro) {
@@ -102,7 +103,7 @@ module.exports = {
             },
             data: {
                 nome,
-                cpfCnpj,
+                cpf,
                 endereco,
             },
         })

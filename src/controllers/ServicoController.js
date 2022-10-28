@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 module.exports = {
 
     async create(request, response) {
-        const { nome, valor } = request.body;
+        const { nome, valor, barbeiroCd } = request.body;
 
         //Valida se foi passado um nome
         if (!nome) {
@@ -20,7 +20,8 @@ module.exports = {
         const servico = await prisma.servico.create({
             data: {
                 nome,
-                valor
+                valor,
+                barbeiroCd
             },
         });
 
