@@ -97,7 +97,8 @@ module.exports = {
             },
             data: {
                 nome,
-                cnpj
+                cnpj,
+                endereco
             },
         })
         return response.status(200).json(barbearia);
