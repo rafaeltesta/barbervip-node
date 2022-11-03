@@ -52,7 +52,7 @@ routes.get("/servico", ServicoController.get);
 routes.delete("/servico/:cdBarbeiro", ServicoController.delete);
 
 //Consultar servico por codigo
-routes.get("/servico.details/:cdBarbeiro", ServicoController.details);
+routes.get("/servico.details/:cdServico", ServicoController.details);
 
 //Editar servico
 routes.put("/servico", ServicoController.update);
