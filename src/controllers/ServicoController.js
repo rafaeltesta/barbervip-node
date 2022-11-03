@@ -74,7 +74,8 @@ module.exports = {
 
     //Editar servico
     async update(request, response) {
-        const { cdServico, nome, valor } = request.body;
+        const { cdServico } = request.params;
+        const {  nome, valor } = request.body;
 
         //Verifica se foi passado o código do servico
         if (!cdServico) {

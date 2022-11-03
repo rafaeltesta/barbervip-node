@@ -55,7 +55,7 @@ routes.delete("/servico/:cdBarbeiro", ServicoController.delete);
 routes.get("/servico.details/:cdServico", ServicoController.details);
 
 //Editar servico
-routes.put("/servico", ServicoController.update);
+routes.put("/servico/:cdServico", ServicoController.update);
 
 
 
