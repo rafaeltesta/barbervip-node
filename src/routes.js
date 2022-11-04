@@ -36,7 +36,7 @@ routes.get("/barbearia", BarbeariaController.get);
 routes.delete("/barbearia/:cdBarbearia", BarbeariaController.delete);
 
 //Consultar barbearia por codigo
-routes.get("/barbearia.details/:cdBarbeiro", BarbeariaController.details);
+routes.get("/barbearia.details/:cdBarbearia", BarbeariaController.details);
 
 //Editar barbearia
 routes.put("/barbearia", BarbeariaController.update);
@@ -49,7 +49,7 @@ routes.post("/servico", ServicoController.create);
 routes.get("/servico", ServicoController.get);
 
 //Deletar servico
-routes.delete("/servico/:cdBarbeiro", ServicoController.delete);
+routes.delete("/servico/:cdServico", ServicoController.delete);
 
 //Consultar servico por codigo
 routes.get("/servico.details/:cdServico", ServicoController.details);
