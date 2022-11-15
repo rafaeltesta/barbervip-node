@@ -17,7 +17,7 @@ module.exports = {
         //
         // parseIso tranforma a string repassada em um objeto em um date do javascript
         // o startofhour pega o inicio da hora, se tiver 19:30 ele vai pegar 19:00..
-        const hourStart = startOfHour(parseISO(date));
+        const hourStart = startOfHour(parseISO(horario));
         // -> hourStart esta antes da data atual?
         if (isBefore(hourStart, new Date())) {
             return res
