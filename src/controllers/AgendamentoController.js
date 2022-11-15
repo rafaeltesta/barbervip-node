@@ -42,7 +42,7 @@ module.exports = {
         }
         //
         // -> Se passou por todas as validacoes agora sim é criado o agendamento
-        const appointment = await Appointment.create({
+        const appointment = await prisma.agendamento.create({
             horario,
             servicoCd
         });
