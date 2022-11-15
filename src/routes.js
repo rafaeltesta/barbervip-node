@@ -1,5 +1,5 @@
-import {AvailableController} from './controllers/AvailableController';
-import {AgendamentoController} from'./controllers/AgendamentoController';
+// import {AvailableController} from './controllers/AvailableController';
+// import {AgendamentoController} from'./controllers/AgendamentoController';
 
 const express = require("express");
 const routes = express.Router();
@@ -64,12 +64,12 @@ routes.put("/servico/:cdServico", ServicoController.update);
 
 
 
-routes.get('/providers/available', AvailableController.index);
+// routes.get('/providers/available', AvailableController.index);
 
-routes.post('/appointments', AgendamentoController.store);
+// routes.post('/appointments', AgendamentoController.store);
 
 
-routes.delete('/appointments/:agendamentoCd', AgendamentoController.delete);
+// routes.delete('/appointments/:agendamentoCd', AgendamentoController.delete);
 
 
 module.exports = routes;
