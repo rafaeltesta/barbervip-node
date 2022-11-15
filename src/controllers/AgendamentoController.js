@@ -32,6 +32,8 @@ module.exports = {
                 horario: hourStart,
             },
         });
+
+        console.log(checkAvailability)
         // -> se ele encontrou o agendamento significa que o horarios NÃO está vago..
         if (checkAvailability) {
             return res
