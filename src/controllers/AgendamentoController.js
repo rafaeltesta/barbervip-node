@@ -35,7 +35,7 @@ module.exports = {
 
         console.log(checkAvailability)
         // -> se ele encontrou o agendamento significa que o horarios NÃO está vago..
-        if (checkAvailability) {
+        if (checkAvailability.length === 1) {
             return res
                 .status(400)
                 .json({ error: 'A data do agendamento não está disponível.' });
