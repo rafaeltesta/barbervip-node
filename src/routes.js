@@ -1,3 +1,6 @@
+import AvailableController from './controllers/AvailableController';
+import AgendamentoController from'./controllers/AgendamentoController';
+
 const express = require("express");
 const routes = express.Router();
 
@@ -7,6 +10,7 @@ const prisma = new PrismaClient();
 const BarbeiroController = require('./controllers/BarbeiroController');
 const BarbeariaController = require('./controllers/BarbeariaController');
 const ServicoController = require('./controllers/ServicoController');
+
 
 
 //Criar barbeiro
@@ -57,6 +61,15 @@ routes.get("/servico.details/:cdServico", ServicoController.details);
 //Editar servico
 routes.put("/servico/:cdServico", ServicoController.update);
 
+
+
+
+routes.get('/providers/:providerId/available', AvailableController.index);
+
+routes.post('/appointments', AgendamentoController.store);
+
+
+routes.delete('/appointments/:agendamentoCd', AgendamentoController.delete);
 
 
 module.exports = routes;

@@ -13,6 +13,7 @@ model servico {
   valor      Decimal?
   barbeiroCd Int
   barbeiro   barbeiro? @relation(fields: [barbeiroCd], references: [cdBarbeiro], map: "fk_barbeiro_servico")
+  agendamentos agendamento[]
 }
 
 model barbeiro {
@@ -30,4 +31,12 @@ model barbearia {
   cnpj        String?
   endereco    String?
   barbeiros   barbeiro[]
+}
+
+model agendamento {
+  cdAgendamento Int      @id @default(autoincrement())
+  horario       DateTime?
+  servicoCd     Int
+  canceled_at   DateTime?
+  servico   servico? @relation(fields: [servicoCd], references: [cdServico], map: "fk_servico_barbearia")
 }
