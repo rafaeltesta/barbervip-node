@@ -1,5 +1,5 @@
-import AvailableController from './controllers/AvailableController';
-import AgendamentoController from'./controllers/AgendamentoController';
+const AvailableController = require('./controllers/AvailableController');
+const AgendamentoController = require('./controllers/AgendamentoController');
 
 const express = require("express");
 const routes = express.Router();
