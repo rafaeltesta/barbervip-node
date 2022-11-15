@@ -29,28 +29,36 @@ module.exports = {
         const appointments = await prisma.agendamento.findMany({
             // onde: o provider sera igual ao que esta buscando
             // e que nao estejam cancelados somente disponivels
-            // where: {
-            //     canceled_at: null,
-            //     horario: {
-            //          lte: startOfDay(searchDate), 
-            //          gte: endOfDay(searchDate)
-            //     },
-            // },
+            where: {
+                canceled_at: null,
+
+            },
         });
 
         // -> Todos os Horários disponíveis!!
         const schedule = [
-            '08:00', // 2020-07-13 08:00:00
-            '09:00', // 2020-07-13 09:00:00
-            '10:00', // 2020-07-13 10:00:00
-            '11:00', // ...
+            '08:00',
+            '08:30', // 2020-07-13 08:00:00
+            '09:00',
+            '09:30', // 2020-07-13 09:00:00
+            '10:00',
+            '10:30', // 2020-07-13 10:00:00
+            '11:00',
+            '11:30', // ...
             '12:00',
+            '12:30',
             '13:00',
+            '13:30',
             '14:00',
+            '14:30',
             '15:00',
+            '15:30',
             '16:00',
+            '16:30',
             '17:00',
+            '17:70',
             '18:00',
+            '18:30',
         ];
 
         // -> Aqui retorna as datas que estaram disponiveis ao usuaario
