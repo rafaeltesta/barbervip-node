@@ -33,6 +33,8 @@ module.exports = {
             },
         });
 
+        const horarioTemp = parseISO(horario);
+        const intCod = parseInt(servicoCd);
         console.log(checkAvailability)
         // -> se ele encontrou o agendamento significa que o horarios NÃO está vago..
         if (checkAvailability.length === 1) {
@@ -43,8 +45,8 @@ module.exports = {
         //
         // -> Se passou por todas as validacoes agora sim é criado o agendamento
         const appointment = await prisma.agendamento.create({
-            horario,
-            servicoCd
+            horario: horarioTemp,
+            servicoCd: intCod 
         });
         //
 
