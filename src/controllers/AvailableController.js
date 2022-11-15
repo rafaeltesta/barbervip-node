@@ -31,8 +31,9 @@ module.exports = {
             // e que nao estejam cancelados somente disponivels
             where: {
                 canceled_at: null,
-                date: {
-                    [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
+                horario: {
+                     lte: startOfDay(searchDate), 
+                     gte: endOfDay(searchDate)
                 },
             },
         });
