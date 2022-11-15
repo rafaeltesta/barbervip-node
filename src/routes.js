@@ -64,7 +64,7 @@ routes.put("/servico/:cdServico", ServicoController.update);
 
 
 
-routes.get('/providers/:providerId/available', AvailableController.index);
+routes.get('/providers/available', AvailableController.index);
 
 routes.post('/appointments', AgendamentoController.store);
 
