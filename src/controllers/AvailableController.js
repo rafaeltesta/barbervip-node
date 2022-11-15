@@ -11,7 +11,7 @@ const {
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-class AvailableController {
+module.exports = {
     // -> Listagem
     async index(req, res) {
         // Recebera do front end uma data do tipo timestamp atravez dos query params
@@ -81,5 +81,3 @@ class AvailableController {
 
 }
 
-
-export default new AvailableController();

@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 
 
-class AgendamentoController{
+module.exports = {
     
     async store(req, res) {
       
@@ -47,7 +47,7 @@ class AgendamentoController{
         //
 
         return res.json(appointment);
-    }
+    },
 
     async delete(req, res) {
         // -> Busca o agendamento usando o id passado pelo parametro E inclui no retorno da listagem o provedor de servico tambem
@@ -65,5 +65,3 @@ class AgendamentoController{
         return res.json(appointment);
     }
 }
-
-export default new AgendamentoController();
