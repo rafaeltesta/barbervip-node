@@ -29,13 +29,13 @@ module.exports = {
         const appointments = await prisma.agendamento.findAll({
             // onde: o provider sera igual ao que esta buscando
             // e que nao estejam cancelados somente disponivels
-            where: {
-                canceled_at: null,
-                horario: {
-                     lte: startOfDay(searchDate), 
-                     gte: endOfDay(searchDate)
-                },
-            },
+            // where: {
+            //     canceled_at: null,
+            //     horario: {
+            //          lte: startOfDay(searchDate), 
+            //          gte: endOfDay(searchDate)
+            //     },
+            // },
         });
 
         // -> Todos os Horários disponíveis!!
