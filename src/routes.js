@@ -71,6 +71,6 @@ routes.post('/appointments', AgendamentoController.store);
 routes.delete('/appointments/:agendamentoCd', AgendamentoController.delete);
 
 
-export default routes;
+module.exports = routes;
 
 
