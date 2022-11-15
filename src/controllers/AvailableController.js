@@ -26,7 +26,7 @@ module.exports = {
         const searchDate = Number(date);
 
         // -> Filtro
-        const appointments = await prisma.agendamento.findAll({
+        const appointments = await prisma.agendamento.findMany({
             // onde: o provider sera igual ao que esta buscando
             // e que nao estejam cancelados somente disponivels
             // where: {
