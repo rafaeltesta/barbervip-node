@@ -1,4 +1,4 @@
-import {
+const {
     startOfDay,
     endOfDay,
     setHours,
@@ -6,7 +6,7 @@ import {
     setSeconds,
     format,
     isAfter,
-} from 'date-fns';
+} = require('date-fns');
 
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();

@@ -1,5 +1,4 @@
-import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
-import pt from 'date-fns/locale/pt-BR';
+const { startOfHour, parseISO, isBefore, format, subHours } =  require('date-fns');
 
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
