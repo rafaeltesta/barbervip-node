@@ -26,7 +26,7 @@ module.exports = {
         }
         //
         // -> Agendamento no mesmo horario?
-        const checkAvailability = await prisma.agendamento.findUnique({
+        const checkAvailability = await prisma.agendamento.findMany({
             where: {
                 canceled_at: null,
                 horario: hourStart,
