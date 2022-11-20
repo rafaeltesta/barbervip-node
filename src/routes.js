@@ -67,6 +67,11 @@ routes.put("/servico/:cdServico", ServicoController.update);
 routes.get('/providers/available', AvailableController.index);
 
 routes.post('/appointments', AgendamentoController.store);
+routes.get('/reservas/:userCd', AgendamentoController.buscaReservas);
+routes.get('/agendamentos/:cdBarbeiro', AgendamentoController.buscaAllAgendamentos);
+routes.get('/agendamento/:servicoCd/:barbeiroCd', AgendamentoController.confirmAgendamento);
+//Deletar agendamento
+routes.delete("/agendamento/:cdAgendamento", AgendamentoController.delete);
 
 
 routes.delete('/appointments/:agendamentoCd', AgendamentoController.delete);

@@ -61,29 +61,85 @@ module.exports = {
         return res.json(appointment);
     },
 
-    async delete(req, res) {
-        // -> Busca o agendamento usando o id passado pelo parametro E inclui no retorno da listagem o provedor de servico tambem
-        // pois sera usado para enviar o email
-        const appointment = await prisma.agendamento.findByPk(req.params.id, {
-           
-        });
-       
-        // -> se estiver tudo certo
-        appointment.canceled_at = new Date();
-        await appointment.save();
+    async delete(request, response) {
+        const { cdAgendamento } = request.params;
 
+        const intCod = parseInt(cdAgendamento);
 
+        //Valida se foi passado o código do agendamento
+        if (!intCod) {
+            return response.status(400).json("O Código do agendamento precisa ser inforamdo!");
+        }
 
-        return res.json(appointment);
+        //Valida se o agendamento existe
+        const agendamentoNaoExiste = await prisma.agendamento.findUnique({ where: { cdAgendamento: intCod } });
+
+        //Retorna erro caso o agendamento não exista
+        if (!agendamentoNaoExiste) {
+            return response.status(404).json("Agendamento não existe!");
+        }
+
+        //Deleta o agendamento
+        await prisma.agendamento.delete({ where: { cdAgendamento: intCod } });
+
+        return response.status(200).send();
     },
 
 
-    // async buscaReservas(req, res) {
-    //     const checkAvailability = await prisma.agendamento.findMany({
-    //         where: {
-    //             canceled_at: null,
-    //             horario: hourStart,
-    //         },
-    //     });
-    // }
+    async buscaReservas(req, res) {
+
+        const { userCd } = req.params;
+
+        const intCod = parseInt(userCd);
+
+        const reservas = await prisma.$queryRaw`
+        SELECT AGENDAMENTO."cdAgendamento",
+               SERVICO.NOME SERVICO,
+	           AGENDAMENTO.HORARIO,
+	           BARBEIRO.NOME BARBEIRO
+          FROM SERVICO, AGENDAMENTO, BARBEIRO
+         WHERE AGENDAMENTO."canceled_at" IS NULL
+           AND AGENDAMENTO."userCd" = ${intCod}
+           AND BARBEIRO."cdBarbeiro" = AGENDAMENTO."barbeiroCd"
+		   AND SERVICO."cdServico" = AGENDAMENTO."servicoCd"
+        `
+        return res.json(reservas);
+    },
+
+    async buscaAllAgendamentos(req, res) {
+
+        const { cdBarbeiro } = req.params;
+
+        const intCod = parseInt(cdBarbeiro);
+
+        const reservas = await prisma.$queryRaw`
+        SELECT AGENDAMENTO."cdAgendamento",
+               SERVICO.NOME SERVICO,
+	           AGENDAMENTO.HORARIO,
+	           BARBEIRO.NOME BARBEIRO
+          FROM SERVICO, AGENDAMENTO, BARBEIRO
+         WHERE AGENDAMENTO."canceled_at" IS NULL
+           AND BARBEIRO."cdBarbeiro" = AGENDAMENTO."barbeiroCd"
+		   AND SERVICO."cdServico" = AGENDAMENTO."servicoCd"
+           AND AGENDAMENTO."barbeiroCd" = ${intCod}
+        `
+        return res.json(reservas);
+    },
+
+    async confirmAgendamento(req, res) {
+
+        const { servicoCd, barbeiroCd } = req.params;
+
+        const intCodServico = parseInt(servicoCd);
+        const intCodBarbeiro = parseInt(barbeiroCd);
+
+        const confirm = await prisma.$queryRaw`
+            SELECT BARBEIRO.NOME BARBEIRO,
+                   SERVICO.NOME  SERVICO
+              FROM BARBEIRO, SERVICO
+             WHERE BARBEIRO."cdBarbeiro" = ${intCodBarbeiro}
+               AND  SERVICO."cdServico" = ${intCodServico}
+        `
+        return res.json(confirm);
+    },
 }
