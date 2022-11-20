@@ -4,7 +4,8 @@ generator client {
 
 datasource db {
   provider = "postgres"
-  url      = "postgres://pwsqxlnkdyovby:beb57d99b19b5fc74e96c8b09f0c8905449cd15f822659156bc4ee3ed7b44486@ec2-44-199-22-207.compute-1.amazonaws.com:5432/ddfrdk2psu9ch9"
+  url      = "postgresql://postgres:gtsnfe2010@localhost:5432/barbervip"
+  // url      = "postgres://pwsqxlnkdyovby:beb57d99b19b5fc74e96c8b09f0c8905449cd15f822659156bc4ee3ed7b44486@ec2-44-199-22-207.compute-1.amazonaws.com:5432/ddfrdk2psu9ch9"
 }
 
 model servico {
@@ -22,6 +23,8 @@ model barbeiro {
   cpf         String?
   barbeariaCd Int
   servicos    servico[]
+  usuarios    usuario[]
+  agendamentos agendamento[]
   barbearia   barbearia? @relation(fields: [barbeariaCd], references: [cdBarbearia], map: "fk_barbearia_barbeiro")
 }
 
@@ -37,6 +40,20 @@ model agendamento {
   cdAgendamento Int      @id @default(autoincrement())
   horario       DateTime?
   servicoCd     Int
+  barbeiroCd    Int
+  userCd     Int
   canceled_at   DateTime?
-  servico   servico? @relation(fields: [servicoCd], references: [cdServico], map: "fk_servico_barbearia")
+  usuario   usuario? @relation(fields: [userCd], references: [cdUser], map: "fk_usuario_agendamento")
+  servico   servico? @relation(fields: [servicoCd], references: [cdServico], map: "fk_servico_agendamento")
+  barbeiro  barbeiro? @relation(fields: [barbeiroCd], references: [cdBarbeiro], map: "fk_barbeiro_agendamento")
+}
+
+model usuario {
+  cdUser             Int                 @id @default(autoincrement())
+  nome               String?
+  email              String?             @unique
+  senha              String?
+  barbeiroCd         Int?
+  agendamentos       agendamento[]
+  barbeiro   barbeiro? @relation(fields: [barbeiroCd], references: [cdBarbeiro], map: "fk_barbeiro_usuario")
 }

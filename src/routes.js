@@ -10,6 +10,7 @@ const prisma = new PrismaClient();
 const BarbeiroController = require('./controllers/BarbeiroController');
 const BarbeariaController = require('./controllers/BarbeariaController');
 const ServicoController = require('./controllers/ServicoController');
+const UserController = require('./controllers/UserController');
 
 
 //Criar barbeiro
@@ -69,6 +70,31 @@ routes.post('/appointments', AgendamentoController.store);
 
 
 routes.delete('/appointments/:agendamentoCd', AgendamentoController.delete);
+
+///////////////////////////////////////////////////////////////////////////////////////
+//Criar User
+routes.post("/user", UserController.create);
+
+//Consultar usuarios
+routes.get("/user", UserController.index);
+
+//Consultar usuario por codigo
+routes.get("/user.details/:cdUser", UserController.details);
+
+//Deletar Usuario
+routes.delete("/user/:cdUser", UserController.delete);
+
+//Editar Usuario
+routes.put("/user", UserController.update);
+
+//Login
+routes.post("/login", UserController.login);
+
+//Validar token
+routes.get("/checktoken/:cdUser", UserController.checkToken);
+
+//Logout
+routes.get("/destroytoken", UserController.destroyToken);
 
 
 module.exports = routes;

@@ -10,7 +10,7 @@ module.exports = {
     async store(req, res) {
       
 
-        const { horario, servicoCd } = req.body;
+        const { horario, servicoCd, barbeiroCd, userCd } = req.body;
 
 
         // -> Chegagem de Horarios
@@ -33,8 +33,10 @@ module.exports = {
             },
         });
 
+        console.log(horario)
         const horarioTemp = parseISO(horario);
-        const intCod = parseInt(servicoCd);
+        const intCodServico = parseInt(servicoCd);
+        const intCodBarbeiro = parseInt(barbeiroCd);
         console.log(checkAvailability)
         // -> se ele encontrou o agendamento significa que o horarios NÃO está vago..
         if (checkAvailability.length === 1) {
@@ -43,11 +45,15 @@ module.exports = {
                 .json({ error: 'A data do agendamento não está disponível.' });
         }
         //
+
+        console.log(horarioTemp)
         // -> Se passou por todas as validacoes agora sim é criado o agendamento
         const appointment = await prisma.agendamento.create({
             data: {
                 horario: horarioTemp,
-                servicoCd: intCod 
+                servicoCd: intCodServico,
+                barbeiroCd: intCodBarbeiro,
+                userCd: userCd
             }
         });
         //
@@ -69,5 +75,15 @@ module.exports = {
 
 
         return res.json(appointment);
-    }
+    },
+
+
+    // async buscaReservas(req, res) {
+    //     const checkAvailability = await prisma.agendamento.findMany({
+    //         where: {
+    //             canceled_at: null,
+    //             horario: hourStart,
+    //         },
+    //     });
+    // }
 }
