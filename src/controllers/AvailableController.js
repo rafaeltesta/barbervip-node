@@ -16,19 +16,21 @@ module.exports = {
     async index(req, res) {
 
         const { date } = req.query;
+        const { barbeiroCd } = req.params;
 
         if (!date) {
             return res.status(404).json({ error: 'Data não encontrado' });
         }
 
         const searchDate = Number(date);
-
+        const intCod = parseInt(barbeiroCd);
 
         const appointments = await prisma.$queryRaw`
             SELECT * 
               FROM agendamento
              WHERE canceled_at IS NULL
                AND horario BETWEEN ${startOfDay(searchDate)} AND ${endOfDay(searchDate)}
+               AND "barbeiroCd" = ${intCod}
         `
 
         // -> Todos os Horários disponíveis

@@ -50,7 +50,7 @@ routes.put("/barbearia", BarbeariaController.update);
 routes.post("/servico", ServicoController.create);
 
 //Consultar servico
-routes.get("/servico", ServicoController.get);
+routes.get("/servico/:cdBarbeiro", ServicoController.get);
 
 //Deletar servico
 routes.delete("/servico/:cdServico", ServicoController.delete);
@@ -64,7 +64,7 @@ routes.put("/servico/:cdServico", ServicoController.update);
 
 
 
-routes.get('/providers/available', AvailableController.index);
+routes.get('/providers/available/:barbeiroCd', AvailableController.index);
 
 routes.post('/appointments', AgendamentoController.store);
 routes.get('/reservas/:userCd', AgendamentoController.buscaReservas);

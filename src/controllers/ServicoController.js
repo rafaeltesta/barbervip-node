@@ -31,7 +31,12 @@ module.exports = {
 
     //Consultar servicos
     async get(request, response) {
-        const servico = await prisma.servico.findMany();
+
+        const { cdBarbeiro } = request.params;
+
+        const intCod = parseInt(cdBarbeiro);
+
+        const servico = await prisma.servico.findMany({ where: { barbeiroCd: intCod } });
         return response.status(200).json(servico);
     },
 

@@ -30,6 +30,7 @@ module.exports = {
             where: {
                 canceled_at: null,
                 horario: hourStart,
+                barbeiroCd: barbeiroCd
             },
         });
 

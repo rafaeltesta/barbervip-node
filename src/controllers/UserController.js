@@ -35,7 +35,7 @@ module.exports = {
 
             return response.status(200).json(usuario);
         } else {
-            return response.status(500).json(usuario);
+            return response.status(400).json({ error: "Erro ao realizar o cadastro!" });
         }
     },
 
