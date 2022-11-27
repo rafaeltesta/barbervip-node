@@ -49,7 +49,7 @@ module.exports = {
 
         //Valida se foi passado o código do servico
         if (!intCod) {
-            return response.status(400).json("O Código do serviço precisa ser inforamdo!");
+            return response.status(400).json({ error: "O Código do serviço precisa ser inforamdo!"});
         }
 
         //Valida se o servico existe
@@ -57,7 +57,7 @@ module.exports = {
 
         //Retorna erro caso o servico não exista
         if (!servicoNaoExiste) {
-            return response.status(404).json("Servico não existe!");
+            return response.status(404).json({ error: "Servico não existe!"});
         }
 
         //Deleta o servico
@@ -84,7 +84,11 @@ module.exports = {
 
         //Verifica se foi passado o código do servico
         if (!cdServico) {
-            return response.status(400).json("O Código do servico precisa ser inforamdo!");
+            return response.status(400).json({ error: "O Código do servico precisa ser inforamdo!"});
+        }
+
+        if (!nome || !valor) {
+            return response.status(400).json({ error: "Insira os dados!"});
         }
 
         const intCd = parseInt(cdServico);
@@ -94,7 +98,7 @@ module.exports = {
 
         //Retorna erro caso o servico não exista
         if (!servico) {
-            return response.status(404).json("servico não existe!");
+            return response.status(404).json({ error: "servico não existe!"});
         }
 
         //Faz a atualização do servico

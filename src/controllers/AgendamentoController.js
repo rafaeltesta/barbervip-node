@@ -13,12 +13,10 @@ module.exports = {
         const { horario, servicoCd, barbeiroCd, userCd } = req.body;
 
 
-        // -> Chegagem de Horarios
-        //
+        // Checa de Horarios
         // parseIso tranforma a string repassada em um objeto em um date do javascript
-        // o startofhour pega o inicio da hora, se tiver 19:30 ele vai pegar 19:00..
         const hourStart = startOfHour(parseISO(horario));
-        // -> hourStart esta antes da data atual?
+        //hourStart esta antes da data atual?
         if (isBefore(hourStart, new Date())) {
             return res
                 .status(400)
@@ -34,21 +32,17 @@ module.exports = {
             },
         });
 
-        console.log(horario)
         const horarioTemp = parseISO(horario);
         const intCodServico = parseInt(servicoCd);
         const intCodBarbeiro = parseInt(barbeiroCd);
-        console.log(checkAvailability)
-        // -> se ele encontrou o agendamento significa que o horarios NÃO está vago..
+        //se ele encontrou o agendamento significa que o horarios NÃO está vago..
         if (checkAvailability.length === 1) {
             return res
                 .status(400)
                 .json({ error: 'A data do agendamento não está disponível.' });
         }
-        //
-
-        console.log(horarioTemp)
-        // -> Se passou por todas as validacoes agora sim é criado o agendamento
+        
+        //Se passou por todas as validacoes cria o agendamento
         const appointment = await prisma.agendamento.create({
             data: {
                 horario: horarioTemp,

@@ -115,13 +115,14 @@ module.exports = {
     `
 
         if (usuario.length != 1) {
-            response.status(200).json({ status: 2, error: "Usuário não cadastrado!" });
+            console.log('a')
+            response.status(400).json({ error: "Usuário não cadastrado!" });
         } else {
             bcrypt.compare(senha, usuario[0].senha, async function (err, same) {
                 if (err) {
-                    response.status(200).json({ error: "Erro no servidor. Por favor tente novamente!" });
+                    response.status(400).json({ error: "Erro no servidor. Por favor tente novamente!" });
                 } else if (!same) {
-                    response.status(200).json({ status: 2, error: "Senha incorreta!" });
+                    response.status(400).json({  error: "Senha incorreta!" });
                 } else {
                     const payload = { email };
                     const token = jwt.sign(payload, secret, {
