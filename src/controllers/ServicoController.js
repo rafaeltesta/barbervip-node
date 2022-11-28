@@ -60,6 +60,17 @@ module.exports = {
             return response.status(404).json({ error: "Servico não existe!"});
         }
 
+        const validaServico = await prisma.$queryRaw`
+            SELECT * 
+              FROM AGENDAMENTO
+             WHERE "servicoCd" = ${intCod}
+        `
+
+        if (validaServico.length > 1) {
+            return response.status(404).json({ error: "Erro ao excluir, serviço vinculado a um agendamento!" });
+        }
+
+
         //Deleta o servico
         await prisma.servico.delete({ where: { cdServico: intCod } });
 
