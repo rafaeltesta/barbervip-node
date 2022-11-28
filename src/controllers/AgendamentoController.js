@@ -111,12 +111,13 @@ module.exports = {
         SELECT AGENDAMENTO."cdAgendamento",
                SERVICO.NOME SERVICO,
 	           AGENDAMENTO.HORARIO,
-	           BARBEIRO.NOME BARBEIRO
-          FROM SERVICO, AGENDAMENTO, BARBEIRO
+	           USUARIO.NOME CLIENTE
+          FROM SERVICO, AGENDAMENTO, BARBEIRO, USUARIO
          WHERE AGENDAMENTO."canceled_at" IS NULL
            AND BARBEIRO."cdBarbeiro" = AGENDAMENTO."barbeiroCd"
 		   AND SERVICO."cdServico" = AGENDAMENTO."servicoCd"
            AND AGENDAMENTO."barbeiroCd" = ${intCod}
+           AND USUARIO."cdUser" = AGENDAMENTO."userCd"
         `
         return res.json(reservas);
     },

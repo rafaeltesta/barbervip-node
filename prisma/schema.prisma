@@ -41,7 +41,7 @@ model agendamento {
   horario       DateTime?
   servicoCd     Int
   barbeiroCd    Int
-  userCd     Int
+  userCd        Int
   canceled_at   DateTime?
   usuario   usuario? @relation(fields: [userCd], references: [cdUser], map: "fk_usuario_agendamento")
   servico   servico? @relation(fields: [servicoCd], references: [cdServico], map: "fk_servico_agendamento")
